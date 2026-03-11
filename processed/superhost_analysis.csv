@@ -1,0 +1,3 @@
+host_is_superhost,avg_price,avg_rating,count
+False,123.88,4.66,5975
+True,139.79,4.86,3105
