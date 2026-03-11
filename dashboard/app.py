@@ -318,11 +318,30 @@ import json
 
 @st.cache_resource
 def load_model():
-    with open(os.path.join(BASE_DIR, 'models/price_predictor.pkl'), 'rb') as f:
-        model = pickle.load(f)
+    import json
+    import pickle
+    from sklearn.linear_model import LinearRegression
+    from sklearn.preprocessing import OneHotEncoder
+    from sklearn.pipeline import Pipeline
+    from sklearn.compose import ColumnTransformer
+
     with open(os.path.join(BASE_DIR, 'models/dropdown_values.json'), 'r') as f:
         dropdowns = json.load(f)
-    return model, dropdowns
+
+    # Retrain model fresh
+    df_model = pd.read_csv(os.path.join(BASE_DIR, 'processed/listings_clean.csv'))
+    features = ['neighbourhood_cleansed', 'room_type', 'accommodates', 'bedrooms', 'beds', 'bathrooms']
+    model_df = df_model[features + ['price']].dropna()
+    X, y = model_df[features], model_df['price']
+
+    preprocessor = ColumnTransformer(transformers=[
+        ('cat', OneHotEncoder(handle_unknown='ignore'), ['neighbourhood_cleansed', 'room_type']),
+        ('num', 'passthrough', ['accommodates', 'bedrooms', 'beds', 'bathrooms'])
+    ])
+    pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('model', LinearRegression())])
+    pipeline.fit(X, y)
+
+    return pipeline, dropdowns
 
 model, dropdowns = load_model()
 
