@@ -3,6 +3,9 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # Page config
 st.set_page_config(
     page_title="Berlin Rental Market",
@@ -99,9 +102,9 @@ st.markdown("""
 # ── LOAD DATA ──
 @st.cache_data
 def load_data():
-    df = pd.read_csv('/Users/ilakia/berlin-rental-analysis/processed/listings_clean.csv')
-    neighbourhood_summary = pd.read_csv('/Users/ilakia/berlin-rental-analysis/processed/neighbourhood_summary.csv')
-    accommodates_analysis = pd.read_csv('/Users/ilakia/berlin-rental-analysis/processed/accommodates_analysis.csv')
+    df = pd.read_csv(os.path.join(BASE_DIR, 'processed/listings_clean.csv'))
+    neighbourhood_summary = pd.read_csv(os.path.join(BASE_DIR, 'processed/neighbourhood_summary.csv'))
+    accommodates_analysis = pd.read_csv(os.path.join(BASE_DIR, 'processed/accommodates_analysis.csv'))
     return df, neighbourhood_summary, accommodates_analysis
 
 df, neighbourhood_summary, accommodates_analysis = load_data()
@@ -315,9 +318,9 @@ import json
 
 @st.cache_resource
 def load_model():
-    with open('/Users/ilakia/berlin-rental-analysis/models/price_predictor.pkl', 'rb') as f:
+    with open(os.path.join(BASE_DIR, 'models/price_predictor.pkl'), 'rb') as f:
         model = pickle.load(f)
-    with open('/Users/ilakia/berlin-rental-analysis/models/dropdown_values.json', 'r') as f:
+    with open(os.path.join(BASE_DIR, 'models/dropdown_values.json'), 'r') as f:
         dropdowns = json.load(f)
     return model, dropdowns
 
