@@ -1,6 +1,6 @@
 # Berlin Rental Market Analysis
 
-An end-to-end data project exploring Airbnb pricing trends across Berlin neighbourhoods — from raw data ingestion to an interactive dashboard with an ML-based price predictor.
+An end-to-end data project exploring Airbnb pricing trends across Berlin neighbourhoods from raw data ingestion to an interactive dashboard with an ML-based price predictor.
 
 **Data source:** [Inside Airbnb](http://insideairbnb.com/get-the-data/) — 9,220 listings across 138 neighbourhoods
 
