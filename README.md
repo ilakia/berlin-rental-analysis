@@ -63,4 +63,4 @@ Size-related features (accommodates, bedrooms) were the strongest predictors —
 
 ---
 
-*Varshini · [LinkedIn](#) · [GitHub](#)*
+*Varshini · [LinkedIn](https://www.linkedin.com/in/varshini-ilakia-m-9a744a74/) · [GitHub](https://github.com/ilakia)*
